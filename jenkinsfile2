@@ -9,15 +9,16 @@ pipeline{
         
     }
     stages{
-        stage('scm checkout')
-          steps{git branch: 'local', url: "$GIT_URL"
+        stage ('scm checkout'){
+          steps {git branch: 'local', url: "$GIT_URL"
         }
-        stage('Testing')
+        }
+        stage ('Testing'){
           steps{sh 'mvn test'
             
-        }
-        stage('build artifact')
-          steps{sh 'mvn clean package -Dskiptest'}
+        }}
+        stage ('build artifact'){
+          steps {sh 'mvn clean package -Dskiptest'}
           post{
             success {slackSend channel: '#artifact', message: '"✅ *Artifact build* for Job: `${env.JOB_NAME}` Build: #${env.BUILD_NUMBER}\\n<${env.BUILD_URL}|Open Build>"', teamDomain: 'vbtech-workspace', tokenCredentialId: 'artifact-slack-jenkins'
 
@@ -26,6 +27,7 @@ pipeline{
 
             }
           }
+        }
 
     }
 }
