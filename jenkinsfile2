@@ -2,7 +2,7 @@ pipeline{
     agent any
     tools {
         maven 'MAVEN_HOME'
-        java 'JAVA_HOME'
+        jdk 'JAVA_HOME'
     }
     environment{
         GIT_URL="https://github.com/DevopsTech12/vprofile-project.git"
